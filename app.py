@@ -8,7 +8,7 @@ HostName = socket.gethostbyname(socket.gethostname())
 app = Flask(__name__)
 
 # Displays pairs of IP addresses and the data flow between them
-#
+# Limits rows returned to 3
 @app.route('/')
 def summary():
   sqlite_engine = create_engine('sqlite:///pcap.db')
