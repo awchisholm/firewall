@@ -45,7 +45,7 @@ def topreceivers():
     'left join dns '\
     'ON traffic.ip_receiver = dns.ip_address '\
     'where traffic.ip = 1 '\
-    'group by ip_sender '\
+    'group by ip_receiver '\
     'order by total_bytes_sent desc'
   totalBytes = pd.read_sql(sql = query, con = sqlite_engine)
   return totalBytes.to_html()
