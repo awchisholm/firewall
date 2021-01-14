@@ -40,12 +40,12 @@ def topsenders():
 def topreceivers():
   sqlite_engine = create_engine('sqlite:///capture.db')
   query = ''\
-    'select traffic.ip_receiver, dns.host_name as host_name_receiver, sum(bytes) as total_bytes_sent '\
+    'select traffic.ip_receiver as receiver, dns.host_name as host_name_receiver, sum(bytes) as total_bytes_sent '\
     'from traffic '\
     'left join dns '\
-    'ON traffic.ip_receiver = dns.ip_address '\
+    'ON receiver = dns.ip_address '\
     'where traffic.ip = 1 '\
-    'group by ip_receiver '\
+    'group by receiver '\
     'order by total_bytes_sent desc'
   totalBytes = pd.read_sql(sql = query, con = sqlite_engine)
   return totalBytes.to_html()
